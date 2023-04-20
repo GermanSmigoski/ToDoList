@@ -3,15 +3,6 @@ const { List } = require("../db");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  /**
-   * @swagger
-   * /list:
-   *   get:
-   *     summary: Obtiene una lista de cosas para haceer
-   *     responses:
-   *       200:
-   *         description: Lista de cosas para hacer
-   */
   try {
     let getList = List.findAll();
     res.status(200).send(getList);

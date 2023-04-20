@@ -5,6 +5,6 @@ const list = require("./list");
 const router = Router();
 
 router.use(express.json());
-router.use("/", list);
+router.use("/list", list);
 
 module.exports = router;
