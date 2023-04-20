@@ -1,5 +1,4 @@
 const swaggerJSDoc = require("swagger-jsdoc");
-const bla = require('./routes/list')
 const options = {
   swaggerDefinition: {
     info: {
@@ -11,7 +10,7 @@ const options = {
     basePath: "/",
   },
 
-  apis: ["./routes/list"],
+  apis: ["./routes/list.js", "./routes/index.js"],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
