@@ -5,9 +5,16 @@ const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger-config");
 
 // SERVER //
 const server = express();
+
+// SWAGGER //
+
+server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+server.use("/api", routes);
 
 // MIDDLEWARES //
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
@@ -35,3 +42,5 @@ server.use((err, req, res, next) => {
   console.error(err);
   res.status(status).send(message);
 });
+
+module.exports = server;

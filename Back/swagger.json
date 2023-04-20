@@ -1,0 +1,61 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mi API",
+    "description": "API para obtener información de usuarios",
+    "version": "1.0"
+  },
+  "paths": {
+    "/usuarios": {
+      "get": {
+        "summary": "Obtiene una lista de todos los usuarios",
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "get": {
+        "summary": "Obtiene la información de un usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID del usuario",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Información del usuario"
+          },
+          "404": {
+            "description": "El usuario no existe"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Usuario": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "apellido": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

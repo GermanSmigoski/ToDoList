@@ -13,5 +13,8 @@ module.exports = (sequelize) => {
     content: {
       type: DataTypes.TEXT,
     },
+    date: {
+      type: DataTypes.DATE,
+    },
   });
 };
