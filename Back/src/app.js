@@ -6,16 +6,14 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index");
 const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./swagger-config");
 
 // SERVER //
 const server = express();
 
 // SWAGGER //
 
-server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-server.use("/api", routes);
-
+// server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// server.use("/api", routes);
 
 // MIDDLEWARES //
 

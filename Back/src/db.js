@@ -41,13 +41,10 @@ sequelize
     console.error("Error al conectar a la base de datos:", error);
   });
 
-// const { MODELS } = sequelize.models
 const { User, List } = sequelize.models;
 
 List.belongsTo(User);
 User.hasMany(List);
-
-// models.belognsto...
 
 module.exports = {
   User,
