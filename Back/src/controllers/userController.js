@@ -10,8 +10,8 @@ module.exports = {
     }
   },
   getUserById: async (req, res) => {
+    const id = req.params.id;
     try {
-      const id = req.params.id;
       const user = await User.findOne({
         where: { id: id },
       });
@@ -23,6 +23,46 @@ module.exports = {
     } catch (err) {
       console.error(err);
       res.status(500).send("Server error");
+    }
+  },
+  postUser: async (req, res) => {
+    let {
+      firstname,
+      lastname,
+      phonenumber,
+      password,
+      dateofbirth,
+      image,
+      email,
+      gender,
+    } = req.body;
+    try {
+      if (
+        !firstname ||
+        !lastname ||
+        !phonenumber ||
+        !password ||
+        !dateofbirth ||
+        !image ||
+        !email ||
+        !gender
+      ) {
+        return "Falta ingresar Datos";
+      } else {
+        let newUser = User.findOrCreate({
+          firstname,
+          lastname,
+          password,
+          phonenumber,
+          dateofbirth,
+          image,
+          email,
+          gender,
+        });
+      }
+      res.status(200).send(newUser);
+    } catch (e) {
+      res.status(404).send(e);
     }
   },
 };

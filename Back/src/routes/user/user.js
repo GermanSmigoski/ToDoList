@@ -2,12 +2,14 @@ const { Router } = require("express");
 const {
   getAllUsers,
   getUserById,
+  postUser,
 } = require("../../controllers/userController");
 
 const router = Router();
 
 router.get("/", getAllUsers);
 router.get("/:id", getUserById);
+router.post("/", postUser);
 
 module.exports = router;
 
@@ -33,7 +35,6 @@ module.exports = router;
  *         - phonenumber
  *         - password
  *         - dateofbirth
- *         - image
  *         - email
  *         - status
  *         - gender
@@ -61,9 +62,6 @@ module.exports = router;
  *           type: string
  *           format: email
  *           description: Correo electrónico del usuario
- *         status:
- *           type: string
- *           description: Estado del usuario (activo/inactivo)
  *         gender:
  *           type: string
  *           description: Género del usuario
@@ -116,7 +114,6 @@ module.exports = router;
  *             dateofbirth: "2000-01-01"
  *             image: "https://www.example.com/image.png"
  *             email: juanperez@example.com
- *             status: active
  *             gender: male
  *     responses:
  *       200:

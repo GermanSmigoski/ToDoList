@@ -13,7 +13,7 @@ module.exports = {
     let { title, content, date } = req.body;
     try {
       if (!title || !content || !date) {
-        return "falta ingresar datos";
+        return "Falta ingresar datos";
       } else {
         let newList = List.findOrCreate({
           title,
