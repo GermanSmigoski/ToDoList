@@ -1,20 +1,29 @@
 const { List } = require("../db");
 
 module.exports = {
-  getList: async () => {
-    let listInfo = await List.findAll();
-    return listInfo;
+  getList: async (req, res) => {
+    try {
+      let allLists = List.findAll();
+      res.status(200).send(allLists);
+    } catch (e) {
+      res.status(404).send(e);
+    }
   },
-  postList: async (title, content, date) => {
-    if (!title || !content || !date) {
-      return "falta ingresar datos";
-    } else {
-      let newList = List.findOrCreate({
-        title,
-        content,
-        date,
-      });
-      return newList;
+  postList: async (req, res) => {
+    let { title, content, date } = req.body;
+    try {
+      if (!title || !content || !date) {
+        return "falta ingresar datos";
+      } else {
+        let newList = List.findOrCreate({
+          title,
+          content,
+          date,
+        });
+        res.status(200).send(newList);
+      }
+    } catch (e) {
+      res.status(400).send(e);
     }
   },
 };

@@ -7,13 +7,28 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phoneNumber: {
+      type: DataTypes.CHAR,
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    dateOfBirth: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    image: {
+      type: DataTypes.BLOB,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -21,6 +36,10 @@ module.exports = (sequelize) => {
     status: {
       type: DataTypes.STRING,
       defaultValue: "active",
+    },
+    gender: {
+      type: DataTypes.ENUM("male", "female", "other"),
+      allowNull: true,
     },
     con: {
       type: DataTypes.STRING,
