@@ -41,7 +41,6 @@ module.exports = router;
  *           description: Fecha de la lista
  */
 
-
 // TAGS
 
 /**
@@ -58,8 +57,6 @@ module.exports = router;
  *                  application/json:
  *                  schema:
  *                  type: array
- *                  items:
- *                      $ref: '#/components/schemas/user'
  *          404:
  *              description: No se encontraron 'To Do List'
  */

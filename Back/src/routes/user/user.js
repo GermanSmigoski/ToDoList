@@ -80,11 +80,9 @@ module.exports = router;
  *       200:
  *         description: Lista de usuarios
  *         content:
- *           application/json:
+ *             application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/User'
+ *             type: array
  *       404:
  *         description: No se encontraron usuarios
  */
