@@ -6,14 +6,34 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index");
 const swaggerUi = require("swagger-ui-express");
-
+const swaggerJsDoc = require("swagger-jsdoc");
+const path = require("path");
+const swaggerSpec = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "To Do List API",
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        url: "http://localhost:4000",
+      },
+    ],
+  },
+  apis: [`${path.join(__dirname, "./routes/*/*.js")}`],
+};
 // SERVER //
 const server = express();
 
 // SWAGGER //
 
-// server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-// server.use("/api", routes);
+server.use("/api", routes);
+server.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJsDoc(swaggerSpec))
+);
 
 // MIDDLEWARES //
 
