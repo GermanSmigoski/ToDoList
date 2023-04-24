@@ -39,6 +39,16 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("male", "female", "other"),
         allowNull: true,
       },
+      createdAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        allowNull: false,
+      },
     },
     {
       timestamps: false,
