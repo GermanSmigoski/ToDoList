@@ -1,21 +1,21 @@
-const { users, lists } = require("../infoPrueba");
+const data = require("../infoPrueba");
 const { List, User } = require("../db");
 
 module.exports = {
   loadInfo: async (req, res) => {
     try {
-      let infoList = List.findAll();
-      let infoUser = User.findAll();
+      let infoList = await List.findAll();
+      let infoUser = await User.findAll();
       if (!infoList || !infoUser) {
-        let user = users.map((user) => user).flat();
-        let dataUser = await User.bulkCreate(user);
+        let user = data.map((user) => user.user).flat();
+        await User.bulkCreate(user);
 
-        let list = lists.map((list) => list).flat();
-        let dataList = await List.bulkCreate(list);
+        let list = data.map((list) => list.list).flat();
+        await List.bulkCreate(list);
       }
-      res.send(200).json("Base de datos cargada");
+      res.status(200).send("Database charged");
     } catch (e) {
-      res.status(404).send(e);
+      res.status(404).send('hola');
     }
   },
 };

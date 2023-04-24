@@ -3,6 +3,6 @@ const { loadInfo } = require("../../controllers/infoController");
 
 const router = Router();
 
-router.get("/", loadInfo);
+router.post("/", loadInfo);
 
-module.exports = router
+module.exports = router;

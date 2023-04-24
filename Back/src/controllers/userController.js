@@ -1,4 +1,7 @@
 const { User } = require("../db");
+const jwt = require("jsonwebtoken");
+const randToken = require("rand-token");
+const secretKey = randToken.generate(64);
 
 module.exports = {
   getAllUsers: async (req, res) => {
@@ -49,7 +52,7 @@ module.exports = {
       ) {
         return "Falta ingresar Datos";
       } else {
-        let newUser = User.findOrCreate({
+        const newUser = User.findOrCreate({
           firstname,
           lastname,
           password,
@@ -59,10 +62,29 @@ module.exports = {
           email,
           gender,
         });
+        const token = jwt.sign(
+          { id: newUser.id, email: newUser.email },
+          secretKey,
+          { expiresIn: "1h" }
+        );
+        res.json({ token });
       }
-      res.status(200).send(newUser);
     } catch (e) {
       res.status(404).send(e);
+    }
+  },
+  userLogin: async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email, password } });
+    if (user) {
+      const token = jwt.sign(
+        { id: user.id, email: user.email },
+        "clave-secreta",
+        { expiresIn: "1h" }
+      );
+      res.json({ token });
+    } else {
+      res.status(401).json({ error: "Credenciales inválidas" });
     }
   },
 };
