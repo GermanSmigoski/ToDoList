@@ -77,11 +77,9 @@ module.exports = {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email, password } });
     if (user) {
-      const token = jwt.sign(
-        { id: user.id, email: user.email },
-        "clave-secreta",
-        { expiresIn: "1h" }
-      );
+      const token = jwt.sign({ id: user.id, email: user.email }, secretKey, {
+        expiresIn: "1h",
+      });
       res.json({ token });
     } else {
       res.status(401).json({ error: "Credenciales inválidas" });
